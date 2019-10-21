@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="proyectoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'proyecto.proyecto.tb_bitacora_prestamos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="tb_bitacora_prestamos">
+    <Key>
+      <PropertyRef Name="id_prestamo" />
+      <PropertyRef Name="monto_solicitado" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_final" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_prestamo" Type="int" Nullable="false" />
+    <Property Name="monto_solicitado" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="fecha_inicio" Type="date" Nullable="false" />
+    <Property Name="fecha_final" Type="date" Nullable="false" />
+    <Property Name="id_usuario" Type="int" />
+    <Property Name="id_cantidad_cuota" Type="int" />
+    <Property Name="monto_real" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tb_cantidad_cuotas">
+    <Key>
+      <PropertyRef Name="id_cantidad_cuota" />
+    </Key>
+    <Property Name="id_cantidad_cuota" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad_Cuotas" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_credenciales">
+    <Key>
+      <PropertyRef Name="id_credencial" />
+    </Key>
+    <Property Name="id_credencial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="contrasena" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="id_rol" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_cuotas">
+    <Key>
+      <PropertyRef Name="id_cuota" />
+    </Key>
+    <Property Name="id_cuota" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_limite_pago" Type="date" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="id_prestamo" Type="int" Nullable="false" />
+    <Property Name="cuota_num" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_estados_maritales">
+    <Key>
+      <PropertyRef Name="id_estado_marital" />
+    </Key>
+    <Property Name="id_estado_marital" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_generos">
+    <Key>
+      <PropertyRef Name="id_genero" />
+    </Key>
+    <Property Name="id_genero" Type="bigint" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tb_intereses">
+    <Key>
+      <PropertyRef Name="id_interes" />
+    </Key>
+    <Property Name="id_interes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="porcentaje_interes" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="id_tipo_cliente" Type="int" Nullable="false" />
+    <Property Name="id_cantidad_cuota" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_pagos">
+    <Key>
+      <PropertyRef Name="id_pago" />
+    </Key>
+    <Property Name="id_pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha_pag" Type="date" Nullable="false" />
+    <Property Name="id_cuota" Type="int" />
+    <Property Name="tarjeta_credito" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tb_prestamos">
+    <Key>
+      <PropertyRef Name="id_prestamo" />
+    </Key>
+    <Property Name="id_prestamo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="monto_solicitado" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+    <Property Name="fecha_inicio" Type="date" Nullable="false" />
+    <Property Name="fecha_final" Type="date" Nullable="false" />
+    <Property Name="id_usuario" Type="int" />
+    <Property Name="id_cantidad_cuota" Type="int" />
+    <Property Name="monto_real" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="255" />
+    <Property Name="ssma$rowid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_roles">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_tipo_clientes">
+    <Key>
+      <PropertyRef Name="id_tipo_cliente" />
+    </Key>
+    <Property Name="id_tipo_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="valor" Type="int" />
+    <Property Name="mora" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="edad" Type="int" Nullable="false" />
+    <Property Name="dpi" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="id_estado_marital" Type="int" Nullable="false" />
+    <Property Name="id_tipo_cliente" Type="int" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="fecha_actualizacion" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="id_genero" Type="bigint" Nullable="false" />
+    <Property Name="id_credencial" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="tb_credenciales$tb_credenciales_ibfk_2">
+    <End Role="tb_roles" Type="Self.tb_roles" Multiplicity="0..1" />
+    <End Role="tb_credenciales" Type="Self.tb_credenciales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_roles">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="tb_credenciales">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_cuotas$tb_cuotas_ibfk_1">
+    <End Role="tb_prestamos" Type="Self.tb_prestamos" Multiplicity="1" />
+    <End Role="tb_cuotas" Type="Self.tb_cuotas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_prestamos">
+        <PropertyRef Name="id_prestamo" />
+      </Principal>
+      <Dependent Role="tb_cuotas">
+        <PropertyRef Name="id_prestamo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_intereses$id_cantidad_cuota_fk">
+    <End Role="tb_cantidad_cuotas" Type="Self.tb_cantidad_cuotas" Multiplicity="1" />
+    <End Role="tb_intereses" Type="Self.tb_intereses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_cantidad_cuotas">
+        <PropertyRef Name="id_cantidad_cuota" />
+      </Principal>
+      <Dependent Role="tb_intereses">
+        <PropertyRef Name="id_cantidad_cuota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_intereses$id_tipo_cliente_fk">
+    <End Role="tb_tipo_clientes" Type="Self.tb_tipo_clientes" Multiplicity="1" />
+    <End Role="tb_intereses" Type="Self.tb_intereses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_clientes">
+        <PropertyRef Name="id_tipo_cliente" />
+      </Principal>
+      <Dependent Role="tb_intereses">
+        <PropertyRef Name="id_tipo_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_pagos$fk_cuotas_pagos">
+    <End Role="tb_cuotas" Type="Self.tb_cuotas" Multiplicity="0..1" />
+    <End Role="tb_pagos" Type="Self.tb_pagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_cuotas">
+        <PropertyRef Name="id_cuota" />
+      </Principal>
+      <Dependent Role="tb_pagos">
+        <PropertyRef Name="id_cuota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_prestamos$id_cantidad_cuota_fk_prestamos">
+    <End Role="tb_cantidad_cuotas" Type="Self.tb_cantidad_cuotas" Multiplicity="0..1" />
+    <End Role="tb_prestamos" Type="Self.tb_prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_cantidad_cuotas">
+        <PropertyRef Name="id_cantidad_cuota" />
+      </Principal>
+      <Dependent Role="tb_prestamos">
+        <PropertyRef Name="id_cantidad_cuota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_prestamos$tb_prestamos_ibfk_1">
+    <End Role="tb_usuarios" Type="Self.tb_usuarios" Multiplicity="0..1" />
+    <End Role="tb_prestamos" Type="Self.tb_prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tb_prestamos">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_prestamos$tb_prestamos_ibfk_2">
+    <End Role="tb_usuarios" Type="Self.tb_usuarios" Multiplicity="0..1" />
+    <End Role="tb_prestamos" Type="Self.tb_prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tb_prestamos">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_usuarios$FKdq0pbaqp8m67xndgytercihyj">
+    <End Role="tb_generos" Type="Self.tb_generos" Multiplicity="1" />
+    <End Role="tb_usuarios" Type="Self.tb_usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_generos">
+        <PropertyRef Name="id_genero" />
+      </Principal>
+      <Dependent Role="tb_usuarios">
+        <PropertyRef Name="id_genero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_usuarios$tb_usuarios_ibfk_1">
+    <End Role="tb_estados_maritales" Type="Self.tb_estados_maritales" Multiplicity="1" />
+    <End Role="tb_usuarios" Type="Self.tb_usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_estados_maritales">
+        <PropertyRef Name="id_estado_marital" />
+      </Principal>
+      <Dependent Role="tb_usuarios">
+        <PropertyRef Name="id_estado_marital" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_usuarios$tb_usuarios_ibfk_2">
+    <End Role="tb_tipo_clientes" Type="Self.tb_tipo_clientes" Multiplicity="1" />
+    <End Role="tb_usuarios" Type="Self.tb_usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_clientes">
+        <PropertyRef Name="id_tipo_cliente" />
+      </Principal>
+      <Dependent Role="tb_usuarios">
+        <PropertyRef Name="id_tipo_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_usuarios$tb_usuarios_ibfk_3">
+    <End Role="tb_credenciales" Type="Self.tb_credenciales" Multiplicity="1" />
+    <End Role="tb_usuarios" Type="Self.tb_usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_credenciales">
+        <PropertyRef Name="id_credencial" />
+      </Principal>
+      <Dependent Role="tb_usuarios">
+        <PropertyRef Name="id_credencial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="proyectoModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_cantidad_cuotas" EntityType="Self.tb_cantidad_cuotas" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_credenciales" EntityType="Self.tb_credenciales" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_cuotas" EntityType="Self.tb_cuotas" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_estados_maritales" EntityType="Self.tb_estados_maritales" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_generos" EntityType="Self.tb_generos" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_intereses" EntityType="Self.tb_intereses" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_pagos" EntityType="Self.tb_pagos" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_prestamos" EntityType="Self.tb_prestamos" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_roles" EntityType="Self.tb_roles" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_tipo_clientes" EntityType="Self.tb_tipo_clientes" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_usuarios" EntityType="Self.tb_usuarios" Schema="proyecto" store:Type="Tables" />
+    <EntitySet Name="tb_bitacora_prestamos" EntityType="Self.tb_bitacora_prestamos" store:Type="Tables" store:Schema="proyecto">
+      <DefiningQuery>SELECT 
+    [tb_bitacora_prestamos].[id_prestamo] AS [id_prestamo], 
+    [tb_bitacora_prestamos].[monto_solicitado] AS [monto_solicitado], 
+    [tb_bitacora_prestamos].[fecha_inicio] AS [fecha_inicio], 
+    [tb_bitacora_prestamos].[fecha_final] AS [fecha_final], 
+    [tb_bitacora_prestamos].[id_usuario] AS [id_usuario], 
+    [tb_bitacora_prestamos].[id_cantidad_cuota] AS [id_cantidad_cuota], 
+    [tb_bitacora_prestamos].[monto_real] AS [monto_real], 
+    [tb_bitacora_prestamos].[estado] AS [estado], 
+    [tb_bitacora_prestamos].[descripcion] AS [descripcion]
+    FROM [proyecto].[tb_bitacora_prestamos] AS [tb_bitacora_prestamos]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="tb_credenciales$tb_credenciales_ibfk_2" Association="Self.tb_credenciales$tb_credenciales_ibfk_2">
+      <End Role="tb_roles" EntitySet="tb_roles" />
+      <End Role="tb_credenciales" EntitySet="tb_credenciales" />
+    </AssociationSet>
+    <AssociationSet Name="tb_cuotas$tb_cuotas_ibfk_1" Association="Self.tb_cuotas$tb_cuotas_ibfk_1">
+      <End Role="tb_prestamos" EntitySet="tb_prestamos" />
+      <End Role="tb_cuotas" EntitySet="tb_cuotas" />
+    </AssociationSet>
+    <AssociationSet Name="tb_intereses$id_cantidad_cuota_fk" Association="Self.tb_intereses$id_cantidad_cuota_fk">
+      <End Role="tb_cantidad_cuotas" EntitySet="tb_cantidad_cuotas" />
+      <End Role="tb_intereses" EntitySet="tb_intereses" />
+    </AssociationSet>
+    <AssociationSet Name="tb_intereses$id_tipo_cliente_fk" Association="Self.tb_intereses$id_tipo_cliente_fk">
+      <End Role="tb_tipo_clientes" EntitySet="tb_tipo_clientes" />
+      <End Role="tb_intereses" EntitySet="tb_intereses" />
+    </AssociationSet>
+    <AssociationSet Name="tb_pagos$fk_cuotas_pagos" Association="Self.tb_pagos$fk_cuotas_pagos">
+      <End Role="tb_cuotas" EntitySet="tb_cuotas" />
+      <End Role="tb_pagos" EntitySet="tb_pagos" />
+    </AssociationSet>
+    <AssociationSet Name="tb_prestamos$id_cantidad_cuota_fk_prestamos" Association="Self.tb_prestamos$id_cantidad_cuota_fk_prestamos">
+      <End Role="tb_cantidad_cuotas" EntitySet="tb_cantidad_cuotas" />
+      <End Role="tb_prestamos" EntitySet="tb_prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="tb_prestamos$tb_prestamos_ibfk_1" Association="Self.tb_prestamos$tb_prestamos_ibfk_1">
+      <End Role="tb_usuarios" EntitySet="tb_usuarios" />
+      <End Role="tb_prestamos" EntitySet="tb_prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="tb_prestamos$tb_prestamos_ibfk_2" Association="Self.tb_prestamos$tb_prestamos_ibfk_2">
+      <End Role="tb_usuarios" EntitySet="tb_usuarios" />
+      <End Role="tb_prestamos" EntitySet="tb_prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="tb_usuarios$FKdq0pbaqp8m67xndgytercihyj" Association="Self.tb_usuarios$FKdq0pbaqp8m67xndgytercihyj">
+      <End Role="tb_generos" EntitySet="tb_generos" />
+      <End Role="tb_usuarios" EntitySet="tb_usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="tb_usuarios$tb_usuarios_ibfk_1" Association="Self.tb_usuarios$tb_usuarios_ibfk_1">
+      <End Role="tb_estados_maritales" EntitySet="tb_estados_maritales" />
+      <End Role="tb_usuarios" EntitySet="tb_usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="tb_usuarios$tb_usuarios_ibfk_2" Association="Self.tb_usuarios$tb_usuarios_ibfk_2">
+      <End Role="tb_tipo_clientes" EntitySet="tb_tipo_clientes" />
+      <End Role="tb_usuarios" EntitySet="tb_usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="tb_usuarios$tb_usuarios_ibfk_3" Association="Self.tb_usuarios$tb_usuarios_ibfk_3">
+      <End Role="tb_credenciales" EntitySet="tb_credenciales" />
+      <End Role="tb_usuarios" EntitySet="tb_usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
