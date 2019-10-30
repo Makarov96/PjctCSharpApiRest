@@ -75,7 +75,7 @@
       <PropertyRef Name="id_pago" />
     </Key>
     <Property Name="id_pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fecha_pag" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Fecha_pag" Type="DateTime" Nullable="false" Precision="0" annotation:StoreGeneratedPattern="Computed" />
     <Property Name="id_cuota" Type="Int32" />
     <Property Name="tarjeta_credito" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tb_cuotas" Relationship="Self.tb_pagos_fk_cuotas_pagos" FromRole="tb_pagos" ToRole="tb_cuotas" />
@@ -86,8 +86,8 @@
     </Key>
     <Property Name="id_prestamo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="monto_solicitado" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
-    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="fecha_final" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+    <Property Name="fecha_final" Type="DateTime" Nullable="false" />
     <Property Name="id_usuario" Type="Int32" />
     <Property Name="id_cantidad_cuota" Type="Int32" />
     <Property Name="monto_real" Type="Decimal" Precision="15" Scale="2" />
@@ -129,8 +129,8 @@
     <Property Name="dpi" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="id_estado_marital" Type="Int32" Nullable="false" />
     <Property Name="id_tipo_cliente" Type="Int32" Nullable="false" />
-    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="fecha_actualizacion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="0" annotation:StoreGeneratedPattern="None" />
+    <Property Name="fecha_actualizacion" Type="DateTime" Nullable="false" Precision="0" annotation:StoreGeneratedPattern="None" />
     <Property Name="id_genero" Type="Int64" Nullable="false" />
     <Property Name="id_credencial" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tb_credenciales" Relationship="Self.tb_usuarios_tb_usuarios_ibfk_3" FromRole="tb_usuarios" ToRole="tb_credenciales" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -12,17 +13,20 @@ using ProyectoWeb;
 
 namespace ProyectoWeb.Controllers
 {
+    [RoutePrefix("api/accountmanagement")]
     public class tb_usuariosController : ApiController
     {
         private proyectoEntities db = new proyectoEntities();
 
         // GET: api/tb_usuarios
+        [Route("usuarios")]
         public IQueryable<tb_usuarios> Gettb_usuarios()
         {
             return db.tb_usuarios;
         }
 
         // GET: api/tb_usuarios/5
+        [Route("usuarios/{id}")]
         [ResponseType(typeof(tb_usuarios))]
         public IHttpActionResult Gettb_usuarios(int id)
         {
@@ -36,7 +40,9 @@ namespace ProyectoWeb.Controllers
         }
 
         // PUT: api/tb_usuarios/5
+        [Route("usuarios/{id}")]
         [ResponseType(typeof(void))]
+        
         public IHttpActionResult Puttb_usuarios(int id, tb_usuarios tb_usuarios)
         {
             if (!ModelState.IsValid)
@@ -49,7 +55,17 @@ namespace ProyectoWeb.Controllers
                 return BadRequest();
             }
 
-            db.Entry(tb_usuarios).State = EntityState.Modified;
+            tb_usuarios tb_user_update = db.tb_usuarios.Find(id);
+            if (tb_user_update == null)
+            {
+                return NotFound();
+            }
+            tb_user_update.nombre = tb_usuarios.nombre;
+            tb_user_update.apellido = tb_usuarios.apellido;
+            tb_user_update.dpi = tb_usuarios.dpi;
+            tb_user_update.tb_credenciales.correo = tb_usuarios.tb_credenciales.correo;
+
+            db.Entry(tb_user_update).State = EntityState.Modified;
 
             try
             {
@@ -70,9 +86,11 @@ namespace ProyectoWeb.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
         // POST: api/tb_usuarios
         [ResponseType(typeof(tb_usuarios))]
-        public IHttpActionResult Posttb_usuarios(tb_usuarios tb_usuarios)
+        [Route("usuarios", Name = "CrearUsuario")]
+        public IHttpActionResult PostCrearUsuario(tb_usuarios tb_usuarios)
         {
             if (!ModelState.IsValid)
             {
@@ -82,10 +100,37 @@ namespace ProyectoWeb.Controllers
             db.tb_usuarios.Add(tb_usuarios);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = tb_usuarios.id_usuario }, tb_usuarios);
+            return CreatedAtRoute("CrearUsuario", new { id = tb_usuarios.id_usuario }, tb_usuarios);
+        }
+
+
+        [Route("login")]
+        [ResponseType(typeof(tb_credenciales))]
+        public IHttpActionResult Postlogin(tb_credenciales tb_credenciales)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            tb_credenciales login=db.tb_credenciales.Where(x => x.correo == tb_credenciales.correo && x.contrasena == tb_credenciales.contrasena ).FirstOrDefault();
+
+            if (login == null)
+            {
+                return NotFound();
+            }
+           // tb_usuarios informacion = db.tb_usuarios.Where(x => x.id_credencial == login.id_credencial).FirstOrDefault();
+           // if (informacion == null)
+           // {
+           //     return NotFound();
+           // }
+           //login.id_credencial = informacion.id_usuario;
+
+            return Ok(login);
         }
 
         // DELETE: api/tb_usuarios/5
+        [Route("usuarios/{id}")]
         [ResponseType(typeof(tb_usuarios))]
         public IHttpActionResult Deletetb_usuarios(int id)
         {
@@ -96,6 +141,7 @@ namespace ProyectoWeb.Controllers
             }
 
             db.tb_usuarios.Remove(tb_usuarios);
+            db.tb_credenciales.Remove(db.tb_credenciales.Find(tb_usuarios.id_credencial));
             db.SaveChanges();
 
             return Ok(tb_usuarios);

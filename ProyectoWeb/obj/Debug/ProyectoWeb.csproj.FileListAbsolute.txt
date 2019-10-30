@@ -89,8 +89,10 @@ D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\bin\es\System.Web.Razor
 D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\bin\es\System.Web.WebPages.resources.dll
 D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\obj\Debug\ProyectoWeb.csprojAssemblyReference.cache
-D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\obj\Debug\ProyectoWeb.csproj.CoreCompileInputs.cache
 D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\obj\Debug\ProyectoWeb.csproj.CopyComplete
 D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\obj\Debug\ProyectoWeb.dll
 D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\obj\Debug\ProyectoWeb.pdb
+D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\obj\Debug\ProyectoWeb.csprojAssemblyReference.cache
+D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\bin\System.Web.Cors.dll
+D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\bin\System.Web.Http.Cors.dll
+D:\Documentos\Visual Studio 2019\ProyectoWeb\ProyectoWeb\bin\System.Web.Http.Cors.xml
